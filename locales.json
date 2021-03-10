@@ -1,0 +1,20 @@
+{
+    "acre": "AC", "amapá": "AP", "amazonas": "AM", "pará": "PA",
+    "rondônia": "RO", "roraima": "RR", "tocantins": "TO",
+    "norte": "AC, AP, AM, PA, RO, RR, TO",
+
+    "alagoas": "AL", "bahia": "BA", "ceará": "CE", "maranhão": "MA",
+    "paraíba": "PB", "pernambuco": "PE", "piauí": "PI",
+    "rio grande do norte": "RN", "sergipe": "SE",
+    "nordeste": "AL, BA, CE, MA, PB, PE, PI, RN, SE",
+
+    "distrito federal": "DF", "goiás": "GO", "mato grosso": "MT",
+    "mato grosso do sul": "MS", "centro-oeste": "DF, GO, MT, MS",
+
+    "espírito santo": "ES", "minas gerais": "MG",
+    "rio de janeiro": "RJ", "são paulo": "SP",
+    "sudeste": "ES, MG, RJ, SP",
+
+    "paraná": "PR", "rio grande do sul": "RS", "santa catarina": "SC",
+    "sul": "PR, RS, SC"
+}
