@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
 
-import sys
 import platform
 import re
 import pathlib
-import time
 from os import path, mkdir, remove, system
 import argparse
 import ftplib as ftp
-import progressbar
 
 from convert_dbf_to_csv import ReadDbf
 
@@ -52,8 +49,7 @@ class PyDatasus:
 
         elif isinstance(patterns, str):
             self.__create_folder(database, patterns, table_or_dbc='dbc')
-            self.__get_data_dbc(pattterns)
-
+            self.__get_data_dbc(patterns)
 
     def get_data(self, database, base, state, date):
         self.get_table_csv(database, base, state, date)
@@ -90,17 +86,27 @@ class PyDatasus:
             return dates
 
     def __generate_pattern(self, database, base, states, dates):
-        if isinstance(states, list) and isinstance(dates, list):
-            return [ base + state + date + r'.[dDc][bBs][cCv]'
-                     for state in states for date in dates ]
-        elif isinstance(states, list) and isinstance(dates, str):
-            return [ base + state + dates + r'.[dDc][bBs][cCv]'
-                     for state in states ]
-        elif isinstance(states, str) and isinstance(dates, str):
-            return [ base + states + dates + r'.[dDc][bBs][cCv]' ]
-        elif isinstance(states, str) and isinstance(dates, list):
-            return [ base + states + date + r'.[dDc][bBs][cCv]'
-                     for date in dates ]
+        if base != 'DOFET':
+            if isinstance(states, list) and isinstance(dates, list):
+                return [ base + state + date + r'.[dDc][bBs][cCv]'
+                         for state in states for date in dates ]
+            elif isinstance(states, list) and isinstance(dates, str):
+                return [ base + state + dates + r'.[dDc][bBs][cCv]'
+                         for state in states ]
+            elif isinstance(states, str) and isinstance(dates, str):
+                return [ base + states + dates + r'.[dDc][bBs][cCv]' ]
+            elif isinstance(states, str) and isinstance(dates, list):
+                return [ base + states + date + r'.[dDc][bBs][cCv]'
+                         for date in dates ]
+        else:
+            if isinstance(dates, list):
+                return [
+                    base + date[2:4] + r'.[dDc][bBs][cCv]' for date in dates
+                ]
+            elif isinstance(dates, str):
+                return [
+                    base + dates[2:4] + r'.[dDc][bBs][cCv]'
+                ]
 
     def __create_folder(self, database, pattern, table_or_dbc):
         pathlib.Path(self.__path_table).mkdir(parents=True, exist_ok=True)
@@ -132,48 +138,28 @@ class PyDatasus:
 
         self.__page.cwd('..')
 
-    def __create_file_write(self, base, select):
-        self.__file_base = open(self.__path_dbc + "/" + base
-                                + "/" + select, "wb")
-        self.__file_base_size = self.__page.size(select)
-
-    def __write(self, base):
-        self.__file_base.write(base)
-        # self.__pbar += len(base)
-        # ratio = round((float(self.__pbar / self.__file_base_size)
-        #                * 100 - 6), 1)
-        # percentage = round(100 * ratio / (100 - 6), 1)
-        # print(percentage)
-
     def __get_data_dbc(self, database):
-        count = 0 
         if path.isfile(self.__path_table + database + '.csv'):
             with open(self.__path_table + database + '.csv') as table:
                 lines = table.readlines()
-            for line in progressbar.progressbar(lines[1:]):
-                # self.__pbar = 0
-                count += 1
+            for line in lines[1:]:
                 self.__page.cwd(line.split(',')[0])
-                data = line.split(',')[1][:4]
                 if not path.isfile(self.__path_dbc + database + '/'
                                    + line.split(',')[1].split('.')[0]
                                    + '.csv'):
 
-                    self.__create_file_write(
-                        database, line.split(',')[1]
-                    )
+                    with open(self.__path_dbc + '/' + database + '/'
+                              + line.split(',')[1], 'wb') as fp: 
+                        self.__page.retrbinary('RETR ' + line.split(',')[1],
+                                               fp.write)
 
-                    self.__page.retrbinary('RETR ' + line.split(',')[1],
-                                           self.__write)
-
-                    self.__convert_dbc(self.__path_dbc + database + '/'
-                                       + line.split(',')[1])
+                        self.__convert_dbc(self.__path_dbc + database + '/'
+                                           + line.split(',')[1])
                 else:
                     pass
 
 
 if __name__ == '__main__':
-    from os import system
     import struct
     import json
 
