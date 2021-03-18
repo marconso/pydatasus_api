@@ -11,15 +11,29 @@ ou
 
 ## Usando com um import
 
-`
+```
+# importando a biblioteca
 import pydatasus
 
+# instanciando a classe PyDatasus
 datasus = PyDatasus()
 
-datasus.get_data('SIM', 'DO', 'AC', '2010')
+# usando a função get_data() do objeto datasus
+# "SIM" = Banco de dados
+# "DO" = Base de dados (Óbito)
+# "AC" = Sigla representativa do Acre
+# "2010" = Ano de busca (pode ser passado uma lista contendo strings)
+# exemplo:
+
+    - usando string '2010'
+    datasus.get_data('SIM', 'DO', 'AC', '2010')
+
 ### ou
-datasus.get_data('SIM', 'DO', 'AC', ['2010', '2011'])
-`
+
+    - usando uma lista de strins ['2010', '2011']
+    datasus.get_data('SIM', 'DO', 'AC', ['2010', '2011'])
+```
+
 
 Mantenedor:
 
