@@ -12,19 +12,12 @@ ou
 ## Usando com um import
 
 `
-####### importando o arquivo
 import pydatasus
 
-####### instanciando 
 datasus = PyDatasus()
 
-####### usando a função get_data()
-####### 1 - "SIM" = Banco de dados do SIM
-####### 2 - "DO" = Base de dados Óbito (lista de bases em: arquivo databases.json)
-####### 3 - "AC" = Sigla do ACRE
-####### 4 - "2010" = Ano de busca
 datasus.get_data('SIM', 'DO', 'AC', '2010')
-####### ou
+### ou
 datasus.get_data('SIM', 'DO', 'AC', ['2010', '2011'])
 `
 
