@@ -1,0 +1,10 @@
+README.md
+pyproject.toml
+setup.py
+pyDATASUS.egg-info/PKG-INFO
+pyDATASUS.egg-info/SOURCES.txt
+pyDATASUS.egg-info/dependency_links.txt
+pyDATASUS.egg-info/top_level.txt
+pydatasus/__init__.py
+pydatasus/convert_dbf_to_csv.py
+pydatasus/pyDATASUS.py

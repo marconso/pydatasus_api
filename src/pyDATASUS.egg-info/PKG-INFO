@@ -1,0 +1,57 @@
+Metadata-Version: 2.1
+Name: pyDATASUS
+Version: 0.0.5
+Summary: A python packge to dowload data for DATASUS
+Home-page: UNKNOWN
+Author: Fabio Marconso
+Author-email: marconsodehsfilho@gmail.com
+License: UNKNOWN
+Description: # Pydatasus API
+        
+        ## Guia rápido de como usar essa bela API
+        
+        
+        ### python pydatasus.py -d "SIM" -b "Óbito Fetal" -e "Acre" -a "2010"
+        
+        ou
+        
+        ### python pydatasus.py -d "SIM" -b "Óbito Fetal" -e "Acre" -a "2010, 2011, 2012"
+        
+        ## Usando com um import
+        
+        ```
+        # importando a biblioteca
+        import pydatasus
+        
+        # instanciando a classe PyDatasus
+        datasus = PyDatasus()
+        
+        # usando a função get_data() do objeto datasus
+        # "SIM" = Banco de dados
+        # "DO" = Base de dados (Óbito)
+        # "AC" = Sigla representativa do Acre
+        # "2010" = Ano de busca (pode ser passado uma lista contendo strings)
+        # exemplo:
+        
+            - usando string '2010'
+            datasus.get_data('SIM', 'DO', 'AC', '2010')
+        
+        ### ou
+        
+            - usando uma lista de strins ['2010', '2011']
+            datasus.get_data('SIM', 'DO', 'AC', ['2010', '2011'])
+        ```
+        
+        
+        Mantenedor:
+        
+        email: marconsodehsfilho@gmail.com
+        
+        email: rodriguesmsb@gmail.com
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown

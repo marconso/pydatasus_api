@@ -6,11 +6,11 @@ import pathlib
 from os import path, mkdir, remove, system
 import argparse
 import ftplib as ftp
+from pydatasus.convert_dbf_to_csv import ReadDbf
 
-from convert_dbf_to_csv import ReadDbf
 
 
-class PyDatasus:
+class start:
 
     def __init__(self):
         super().__init__()
@@ -187,7 +187,7 @@ if __name__ == '__main__':
         data = json.load(f)
         estado = data[args['estado'].lower()]
 
-    datasus = PyDatasus()
+    datasus = start()
     try:
         datasus.get_data(args['banco'].upper(), base, estado,
                          args['ano'].split(', ')
