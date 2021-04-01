@@ -5,6 +5,8 @@ from os import path, system
 from dbfread import DBF
 import pandas as pd
 import csv
+import tempfile
+
 
 folder = path.dirname(__file__)
 blast_dbf = path.join(folder, 'blast_dbf')

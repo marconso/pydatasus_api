@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="pyDATASUS", # Replace with your own username
-    version="0.0.5",
+    version="0.0.6",
     author="Fabio Marconso",
     author_email="marconsodehsfilho@gmail.com",
     description="A python packge to dowload data for DATASUS",
